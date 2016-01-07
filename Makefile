@@ -13,6 +13,7 @@ install: pam_riddle.c
 		mkdir /usr/share/riddles; \
 		touch /usr/share/riddles/questions; \
 		touch /usr/share/riddles/ansqers; \
+		chmod -R 777 /usr/share/riddles \
 		bash ./addriddles.sh ./questions ./answers; \
 	fi
 	$(CC) -shared pam_riddle.o -o /lib/security/pam_riddle.so -L/usr/local/ssl/lib -lcrypto

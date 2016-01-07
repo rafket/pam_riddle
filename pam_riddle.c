@@ -68,6 +68,9 @@ PAM_EXTERN int pam_sm_authenticate( pam_handle_t *pamh, int flags, int argc, con
     pam_msgp->msg=riddles[pick].quest;
     (pam_convp->conv)(1, (const struct pam_message **)&pam_msgp, &pam_resp, pam_convp->appdata_ptr);
 
+    if(pam_resp==NULL || pam_resp->resp==NULL)
+        return PAM_AUTH_ERR;
+
     byte hash[SHA256_DIGEST_LENGTH];
     sha256hash(pam_resp->resp, hash);
 
